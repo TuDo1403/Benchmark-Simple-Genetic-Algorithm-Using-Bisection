@@ -21,19 +21,19 @@ def variate(pop, crossover_mode):
     for i in range(0, num_inds, 2):
         index1 = indices[i]
         index2 = indices[i+1]
-        offspring1 = pop[index1].tolist()
-        offspring2 = pop[index2].tolist()
+        offspring1 = pop[index1].copy()
+        offspring2 = pop[index2].copy()
 
         for j in range(num_params):
             if np.random.randint(low=0, high=2) == 1:
                 if crossover_mode == Crossover.ONEPOINT:
-                    offspring1[:j], offspring2[:j] = deepcopy(offspring2[:j]), offspring1[:j]
+                    offspring1[:j], offspring2[:j] = offspring2[:j], offspring1[:j].copy()
                     break
                 else:
                     offspring1[j], offspring2[j] = offspring2[j], offspring1[j]
 
-        offsprings.append(np.array(offspring1))
-        offsprings.append(np.array(offspring2))
+        offsprings.append(offspring1)
+        offsprings.append(offspring2)
 
     return np.reshape(offsprings, (num_inds, num_params))
 
@@ -76,9 +76,9 @@ def POPOP(user_options, func_inf, seed_num=1):
 
         generation += 1
 
-    optimized_solution_found = user_options.PROBLEM_SIZE == max(pop_fitness)
-    print(optimized_solution_found, num_eval_func_calls)
-    return (optimized_solution_found, num_eval_func_calls)
+    optimized_solution_found = user_options.PROBLEM_SIZE == np.unique(pop_fitness)
+    print(optimized_solution_found[0], num_eval_func_calls)
+    return (optimized_solution_found[0], num_eval_func_calls)
 
 class Crossover(Enum):
     ONEPOINT = 1
@@ -95,10 +95,3 @@ class POPOPConfig:
         self.POP_SIZE = pop_size
         self.TOURNAMENT_SIZE = tournament_size
         self.CROSSOVER_MODE = crossover_mode
-
-        
-
-
-
-
-
