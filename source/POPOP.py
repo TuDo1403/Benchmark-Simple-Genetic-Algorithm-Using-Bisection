@@ -24,12 +24,12 @@ def variate(pop, crossover_mode):
         offspring1 = pop[index1].copy()
         offspring2 = pop[index2].copy()
 
-        for j in range(num_params):
-            if np.random.randint(low=0, high=2) == 1:
-                if crossover_mode == Crossover.ONEPOINT:
-                    offspring1[:j], offspring2[:j] = offspring2[:j], offspring1[:j].copy()
-                    break
-                else:
+        if crossover_mode == Crossover.ONEPOINT:
+            point = np.random.randint(low=0, high=num_params-1)
+            offspring1[:point], offspring2[:point] = offspring2[:point], offspring1[:point].copy()
+        else:
+            for j in range(num_params):
+                if np.random.randint(low=0, high=2) == 1:
                     offspring1[j], offspring2[j] = offspring2[j], offspring1[j]
 
         offsprings.append(offspring1)

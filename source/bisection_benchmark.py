@@ -87,12 +87,12 @@ def report_df(id, opt_method, user_options, func_inf):
 id = 18521578
 user_options = pp.POPOPConfig
 user_options.TOURNAMENT_SIZE = 4
-user_options.CROSSOVER_MODE = pp.Crossover.UX
-func_inf = ff.FuncInf("One Max", ff.onemax)
+# user_options.CROSSOVER_MODE = pp.Crossover.UX
+# func_inf = ff.FuncInf("One Max", ff.onemax)
 
-df = report_df(id, pp.POPOP, user_options, func_inf)
-df_name = 'sGA-UX-OneMax'
-df.to_csv('../report/{}.csv'.format(df_name))
+# df = report_df(id, pp.POPOP, user_options, func_inf)
+# df_name = 'sGA-UX-OneMax'
+# df.to_csv('../report/{}.csv'.format(df_name))
 ##
 
 ##
@@ -105,12 +105,12 @@ df.to_csv('../report/{}.csv'.format(df_name))
 ##
 
 ##
-user_options.CROSSOVER_MODE = pp.Crossover.UX
-func_inf = ff.FuncInf("Trap Five", ff.trap_five)
+# user_options.CROSSOVER_MODE = pp.Crossover.UX
+# func_inf = ff.FuncInf("Trap Five", ff.trap_five)
 
-df = report_df(id, pp.POPOP, user_options, func_inf)
-df_name = 'sGA-UX-TrapFive'
-df.to_csv('../report/{}.csv'.format(df_name))
+# df = report_df(id, pp.POPOP, user_options, func_inf)
+# df_name = 'sGA-UX-TrapFive'
+# df.to_csv('../report/{}.csv'.format(df_name))
 ##
 
 
