@@ -62,7 +62,7 @@ def POPOP(user_options, func_inf, seed_num=1):
     selection_size = len(population)
     generation = 0
 
-    while len(np.unique(pop_fitness)) != 1:
+    while not converge(population):
         offsprings = variate(population, user_options.CROSSOVER_MODE)
         off_fitness = evaluate(offsprings, func_inf.F_FUNC)
         num_eval_func_calls += len(off_fitness)
@@ -80,11 +80,15 @@ def POPOP(user_options, func_inf, seed_num=1):
     print(optimized_solution_found[0], num_eval_func_calls)
     return (optimized_solution_found[0], num_eval_func_calls)
 
+def converge(pop):
+    return len(np.unique(pop, axis=0)) == 1
+
 class Crossover(Enum):
     ONEPOINT = 1
     UX = 2
 
 class POPOPConfig:
+    NAME = 'POPOP'
     PROBLEM_SIZE = 4
     POP_SIZE = 4
     TOURNAMENT_SIZE = 4
