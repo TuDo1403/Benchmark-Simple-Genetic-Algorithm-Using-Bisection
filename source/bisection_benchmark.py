@@ -22,7 +22,7 @@ def find_upper_bound(opt_method, user_options, func_inf, seeds):
         user_options.POP_SIZE = user_options.POP_SIZE * 2
         results = simple_GA_10_runs(opt_method, user_options, func_inf, seeds)
         success = np.sum(results[:, 0], axis=0) == len(seeds)
-        if not success and user_options.POP_SIZE >= 8192:
+        if not success and user_options.POP_SIZE >= 100000:
             return 0
         
     return user_options.POP_SIZE
@@ -69,7 +69,7 @@ def bisection_10_runs(id, opt_method, user_options, func_inf):
     return np.array(results)
 
 def report_df(id, opt_method, user_options, func_inf):
-    problem_sizes = [10 * 2**i for i in range(0, 5)]
+    problem_sizes = [10 * 2**i for i in range(4, 5)]
     results = []
     for size in problem_sizes:
         user_options.PROBLEM_SIZE = size
@@ -96,12 +96,12 @@ user_options.TOURNAMENT_SIZE = 4
 ##
 
 ##
-user_options.CROSSOVER_MODE = pp.Crossover.ONEPOINT
-func_inf = ff.FuncInf("One Max", ff.onemax)
+# user_options.CROSSOVER_MODE = pp.Crossover.ONEPOINT
+# func_inf = ff.FuncInf("One Max", ff.onemax)
 
-df = report_df(id, pp.POPOP, user_options, func_inf)
-df_name = 'sGA-1X-OneMax'
-df.to_csv('../report/{}.csv'.format(df_name))
+# df = report_df(id, pp.POPOP, user_options, func_inf)
+# df_name = 'sGA-1X-OneMax'
+# df.to_csv('../report/{}.csv'.format(df_name))
 ##
 
 ##

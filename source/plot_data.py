@@ -37,13 +37,17 @@ def plot(data, label, title, plot_eval=False, hold=False):
 fig, ax = plt.subplots()
 filename = 'sGA-UX-TrapFive.csv'
 df = pd.read_csv('../report/{}'.format(filename))
-ux_onemax = df.to_numpy()
+df = df[df.MRPS != '-']
+ux = df.to_numpy()
+ux = np.array(ux, dtype=np.float)
 
-plot(ux_onemax, 'UX', 'sGA-TrapFive', False, True)
+plot(ux, 'UX', 'sGA-TrapFive', False, True)
 
 filename = 'sGA-1X-TrapFive.csv'
 df = pd.read_csv('../report/{}'.format(filename))
-ux_onemax = df.to_numpy()
+df = df[df.MRPS != '-']
+onepoint = df.to_numpy()
+onepoint = np.array(onepoint, dtype=np.float)
 
-plot(ux_onemax, '1X', 'sGA-TrapFive', False)
+plot(onepoint, '1X', 'sGa-TrapFive', False, False)
 
