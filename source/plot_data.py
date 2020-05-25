@@ -21,7 +21,7 @@ def plot(data, label, title, plot_eval=False, hold=False):
     ax.set_xticks([10 * 2**i for i in range(5)])
 
     ax.set_xlim(9, 170)
-    ax.set_ylim(10, 150000)
+    ax.set_ylim(10, 10**7)
     
     # Keep tick from log scale
     ax.get_xaxis().set_major_formatter(matplotlib.ticker.ScalarFormatter())
@@ -35,19 +35,27 @@ def plot(data, label, title, plot_eval=False, hold=False):
         plt.show()
 
 fig, ax = plt.subplots()
-filename = 'sGA-UX-TrapFive.csv'
+filename = 'sGA-UX-OneMax.csv'
 df = pd.read_csv('../report/{}'.format(filename))
 df = df[df.MRPS != '-']
 ux = df.to_numpy()
 ux = np.array(ux, dtype=np.float)
 
-plot(ux, 'UX', 'sGA-TrapFive', False, True)
+plot(ux, 'UX', 'OneMax Benchmark (ECGA vs POPOP)', True, hold=True)
 
-filename = 'sGA-1X-TrapFive.csv'
+filename = 'sGA-1X-OneMax.csv'
 df = pd.read_csv('../report/{}'.format(filename))
 df = df[df.MRPS != '-']
 onepoint = df.to_numpy()
 onepoint = np.array(onepoint, dtype=np.float)
 
-plot(onepoint, '1X', 'sGa-TrapFive', False, False)
+plot(onepoint, '1X', 'OneMax Benchmark (ECGA vs POPOP)', True, hold=True)
+
+filename = 'ECGA-OneMax.csv'
+df = pd.read_csv('../report/{}'.format(filename))
+df = df[df.MRPS != '-']
+ecga = df.to_numpy()
+ecga = np.array(ecga, dtype=np.float)
+
+plot(ecga, 'ECGA', 'OneMax Benchmark (ECGA vs POPOP)', True, hold=False)
 
